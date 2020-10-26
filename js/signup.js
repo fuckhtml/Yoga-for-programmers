@@ -8,6 +8,35 @@
 // Full JS approach
 const initPage = () => {
 
+  const enrollFormOnSubmitHandler = (event) => {
+    event.preventDefault();
+
+    const request = new XMLHttpRequest();
+    const method = 'POST';
+    const url = 'feedback.php';
+    const isAsync = false;
+    const body = `` + 
+      `firstname=`  + document.querySelector('input[name="firstname"]').value   + `&`+
+      `lastname=`   + document.querySelector('input[name="lastname"]').value    + `&`+
+      `email=`      + document.querySelector('input[name="email"]').value       + `&`+
+      `birthmonth=` + document.querySelector('select[name="birthmonth"]').value + `&`+
+      `birthday=`   + document.querySelector('select[name="birthday"]').value   + `&`+
+      `level=`      + document.querySelector('select[name="level"]').value      + `&`+
+      `exp=`        + document.querySelector('select[name="exp"]').value        + `&`+
+      `bio=`        + document.querySelector('textarea[name="bio"]').value;
+    // if async
+    // request.addEventListener('readystatechange', function() {
+    //   if (request.readyState === 4 && request.status === 200) {
+    //     document.querySelector('#content').innerHTML = request.response;
+    //   }
+    // });
+    request.open(method, url, isAsync);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    request.send(body);
+
+    document.querySelector('#content').innerHTML = request.response;
+  }
+
   const getNotEmptyValidityMsg = (value) => {
     const invalidMsg = 'This field can not be empty!';
     return (!/^\s*$/.test(value) ? 'valid' : invalidMsg);
@@ -72,6 +101,8 @@ const initPage = () => {
   }
 
   // Main Logic
+
+  document.querySelector('#enroll-form').addEventListener('submit', enrollFormOnSubmitHandler);
 
   document.querySelector('#firstname').addEventListener('blur', function(event) {
     renderValidityMsg(event.target, [getNotEmptyValidityMsg, getLettersValidityMsg]);

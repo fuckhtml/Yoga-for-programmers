@@ -15,7 +15,7 @@
       <div id="content">
         <h2>Enroll</h2>
 
-        <form action="feedback.php" method="post">
+        <form id="enroll-form" action="feedback.php" method="post">
           <fieldset>
             <label for="firstname">First Name</label>
             <input name="firstname" id="firstname" type="text" />
@@ -32,9 +32,9 @@
           </fieldset>
           
           <fieldset>
-            <label for="birthday-month">Birthday</label>
+            <label for="birthmonth">Birthday</label>
 
-            <select name="birthday-month" id="birthday-month">
+            <select name="birthmonth" id="birthmonth">
               <option value="January">January</option>
               <option value="February">February</option>
               <option value="Match">Match</option>
@@ -49,7 +49,7 @@
               <option value="December">December</option>
             </select>
 
-            <select name="birthday-day" id="birthday-day">
+            <select name="birthday" id="birthday">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -96,9 +96,9 @@
           </fieldset>
 
           <fieldset>
-            <label for="years-of-experience">Years of Experience</label>
+            <label for="exp">Years of Experience</label>
 
-            <select name="years-of-experience">
+            <select name="exp">
               <option value="<1">Less than 1</option>
               <option value="1-3">1 — 3</option>
               <option value="3-5">3 — 5</option>
