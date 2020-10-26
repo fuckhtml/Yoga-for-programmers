@@ -28,7 +28,6 @@ const initPage = () => {
     return (/^[\w_-]+@[\w]+\.[\w]+$/.test(value) ? 'valid' : invalidMsg);
   }
 
-
   const renderValidityMsg = (inputElem, getValidityFunctionList) => {
     // Remove previous invalid messages
     while (inputElem.nextElementSibling) {
@@ -50,6 +49,28 @@ const initPage = () => {
     inputElem.style.border = '2px solid ' + (isValid ? 'green' : 'red');
   };
 
+  const retrieveGetParamsFromUrl = () => {
+    const url = window.location.href;
+    
+    let getParams = {}
+    window.location.href
+    .slice(window.location.href.indexOf('?') + 1)
+    .split('&').map(function(str) {
+      const prop = str.slice(0, str.indexOf('='));
+      const value = str.slice(str.indexOf('=') + 1);
+      getParams[prop] = value;
+    });
+
+    return getParams;
+  }
+
+  const setClassLevel = () => {
+    const level = retrieveGetParamsFromUrl().level;
+    if (level && level !== 'default') {
+      document.querySelector(`#level option[value="${level}"]`).selected = true;
+    }
+  }
+
   // Main Logic
 
   document.querySelector('#firstname').addEventListener('blur', function(event) {
@@ -63,6 +84,8 @@ const initPage = () => {
   });
 
   document.querySelector('#enroll').disabled = false;
+
+  setClassLevel();
 }
 
 window.addEventListener('load', initPage);
